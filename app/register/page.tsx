@@ -52,8 +52,8 @@ export default function RegisterPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-purple-500 to-pink-500 px-4">
       <div className="max-w-md w-full bg-white rounded-2xl shadow-2xl p-8">
         <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Doug Stax</h1>
-          <p className="text-gray-900">Bergabung dengan Komunitas Zumba 🎉</p>
+          <h1 className="text-4xl font-bold text-gray-900 mb-2">DougStax Hub</h1>
+          <p className="text-gray-900">Bergabung dengan Komunitas DougStax 🎉</p>
         </div>
 
         <form onSubmit={handleSubmit} className="space-y-4">
