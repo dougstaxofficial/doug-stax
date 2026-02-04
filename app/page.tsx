@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState, useEffect } from 'react'
 
 export default function Home() {
@@ -58,95 +59,99 @@ export default function Home() {
       </div>
 
       {/* Hero Section */}
-      <div className="relative z-10 flex items-center justify-center min-h-screen px-4">
+      <div className="relative z-10 flex items-center justify-center min-h-screen px-4 py-8">
         <div className="text-center text-white max-w-6xl">
-          {/* Logo/Title with Gradient */}
-          <div className="mb-8 transform hover:scale-105 transition-transform duration-300">
-            <h1 
-              className="text-7xl md:text-9xl font-black mb-4 bg-clip-text text-transparent bg-gradient-to-r from-yellow-200 via-pink-200 to-purple-200 animate-gradient"
-              style={{ transform: `translateY(${scrollY * 0.5}px)` }}
-            >
-              DougStax Hub
-            </h1>
-            <div className="flex justify-center gap-2 mb-6">
+          {/* Logo - Ukuran diperkecil untuk mobile */}
+          <div className="mb-6 md:mb-8 transform hover:scale-105 transition-transform duration-300">
+            <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 mx-auto mb-3 md:mb-4">
+              <Image 
+                src="/logo1.png" 
+                alt="DougStax Hub Logo"
+                fill
+                className="object-contain drop-shadow-2xl"
+                priority
+              />
+            </div>
+            <div className="flex justify-center gap-2 mb-4 md:mb-6">
               {[...Array(5)].map((_, i) => (
                 <div
                   key={i}
-                  className="w-3 h-3 bg-yellow-400 rounded-full animate-bounce"
+                  className="w-2 h-2 md:w-3 md:h-3 bg-yellow-400 rounded-full animate-bounce"
                   style={{ animationDelay: `${i * 0.1}s` }}
                 ></div>
               ))}
             </div>
           </div>
 
-          <p className="text-3xl md:text-4xl mb-6 font-bold text-yellow-200 animate-pulse">
+          {/* Tagline - Ukuran text diperkecil untuk mobile */}
+          <p className="text-xl sm:text-2xl md:text-4xl mb-4 md:mb-6 font-bold text-yellow-200 animate-pulse">
             Platform Komunitas DougStax Indonesia
           </p>
           
-          <p className="text-lg md:text-2xl mb-12 text-purple-100 max-w-3xl mx-auto leading-relaxed">
+          <p className="text-sm sm:text-base md:text-2xl mb-8 md:mb-12 text-purple-100 max-w-3xl mx-auto leading-relaxed px-2">
             Bergabung dengan komunitas DougStax Hub terbesar di Indonesia. 
             Daftar event, dapatkan tiket, dan nikmati pengalaman yang luar biasa!
           </p>
 
-          {/* Activity Pills */}
-          <div className="flex flex-wrap justify-center gap-3 mb-12">
+          {/* Activity Pills - Ukuran diperkecil */}
+          <div className="flex flex-wrap justify-center gap-2 md:gap-3 mb-8 md:mb-12">
             {activities.map((activity, index) => (
               <div
                 key={index}
-                className={`${activity.color} px-6 py-3 rounded-full font-bold text-white shadow-lg transform hover:scale-110 transition-all duration-300 hover:rotate-3 cursor-pointer`}
+                className={`${activity.color} px-4 py-2 md:px-6 md:py-3 rounded-full font-bold text-white text-sm md:text-base shadow-lg transform hover:scale-110 transition-all duration-300 hover:rotate-3 cursor-pointer`}
               >
-                <span className="mr-2">{activity.emoji}</span>
+                <span className="mr-1 md:mr-2">{activity.emoji}</span>
                 {activity.name}
               </div>
             ))}
           </div>
           
-          {/* CTA Buttons */}
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-20">
+          {/* CTA Buttons - Ukuran diperkecil untuk mobile */}
+          <div className="flex flex-col sm:flex-row gap-4 md:gap-6 justify-center items-center mb-12 md:mb-20">
             <Link
               href="/register"
-              className="group relative px-10 py-5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full font-black text-xl hover:shadow-2xl transition-all transform hover:scale-110 overflow-hidden"
+              className="group relative px-8 py-4 md:px-10 md:py-5 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-full font-black text-base md:text-xl hover:shadow-2xl transition-all transform hover:scale-110 overflow-hidden w-full sm:w-auto"
             >
-              <span className="relative z-10 flex items-center gap-2">
+              <span className="relative z-10 flex items-center justify-center gap-2">
                 Daftar Sekarang 🚀
               </span>
               <div className="absolute inset-0 bg-gradient-to-r from-orange-500 to-red-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
             </Link>
             <Link
               href="/login"
-              className="px-10 py-5 bg-white/20 backdrop-blur-lg border-3 border-white text-white rounded-full font-black text-xl hover:bg-white hover:text-purple-600 transition-all transform hover:scale-110 shadow-xl"
+              className="px-8 py-4 md:px-10 md:py-5 bg-white/20 backdrop-blur-lg border-2 md:border-3 border-white text-white rounded-full font-black text-base md:text-xl hover:bg-white hover:text-purple-600 transition-all transform hover:scale-110 shadow-xl w-full sm:w-auto"
             >
               Login ✨
             </Link>
           </div>
 
-          {/* Features Grid */}
-          <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+          {/* Features Grid - Padding dan text diperkecil */}
+          <div className="grid md:grid-cols-3 gap-4 md:gap-6 max-w-5xl mx-auto mb-12 md:mb-0">
             {features.map((feature, index) => (
               <div
                 key={index}
-                className={`relative bg-white/10 backdrop-blur-xl rounded-3xl p-8 border-2 border-white/30 transform transition-all duration-500 hover:scale-105 cursor-pointer ${
-                  activeFeature === index ? 'ring-4 ring-yellow-400 scale-105' : ''
+                className={`relative bg-white/10 backdrop-blur-xl rounded-2xl md:rounded-3xl p-6 md:p-8 border-2 border-white/30 transform transition-all duration-500 hover:scale-105 cursor-pointer ${
+                  activeFeature === index ? 'ring-2 md:ring-4 ring-yellow-400 scale-105' : ''
                 }`}
                 onMouseEnter={() => setActiveFeature(index)}
               >
                 {/* Gradient Overlay */}
-                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 hover:opacity-20 transition-opacity rounded-3xl`}></div>
+                <div className={`absolute inset-0 bg-gradient-to-br ${feature.color} opacity-0 hover:opacity-20 transition-opacity rounded-2xl md:rounded-3xl`}></div>
                 
                 <div className="relative z-10">
-                  <div className="text-6xl mb-4 animate-bounce">{feature.icon}</div>
-                  <h3 className="text-2xl font-black mb-3 text-yellow-200">{feature.title}</h3>
-                  <p className="text-purple-100 text-lg">{feature.description}</p>
+                  <div className="text-4xl md:text-6xl mb-3 md:mb-4 animate-bounce">{feature.icon}</div>
+                  <h3 className="text-lg md:text-2xl font-black mb-2 md:mb-3 text-yellow-200">{feature.title}</h3>
+                  <p className="text-purple-100 text-sm md:text-lg">{feature.description}</p>
                 </div>
 
                 {/* Corner Accent */}
-                <div className="absolute top-4 right-4 w-8 h-8 bg-yellow-400 rounded-full opacity-50"></div>
+                <div className="absolute top-3 right-3 md:top-4 md:right-4 w-6 h-6 md:w-8 md:h-8 bg-yellow-400 rounded-full opacity-50"></div>
               </div>
             ))}
           </div>
 
-          {/* Stats Section */}
-          <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto">
+          {/* Stats Section - Ukuran diperkecil */}
+          <div className="mt-12 md:mt-20 grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-6 max-w-4xl mx-auto">
             {[
               { number: '1000+', label: 'Members' },
               { number: '50+', label: 'Events' },
@@ -155,21 +160,21 @@ export default function Home() {
             ].map((stat, index) => (
               <div
                 key={index}
-                className="bg-white/10 backdrop-blur-lg rounded-2xl p-6 border border-white/20 transform hover:scale-110 transition-transform"
+                className="bg-white/10 backdrop-blur-lg rounded-xl md:rounded-2xl p-4 md:p-6 border border-white/20 transform hover:scale-110 transition-transform"
               >
-                <div className="text-4xl md:text-5xl font-black text-yellow-300 mb-2">
+                <div className="text-2xl sm:text-3xl md:text-5xl font-black text-yellow-300 mb-1 md:mb-2">
                   {stat.number}
                 </div>
-                <div className="text-purple-200 font-semibold">{stat.label}</div>
+                <div className="text-purple-200 font-semibold text-xs sm:text-sm md:text-base">{stat.label}</div>
               </div>
             ))}
           </div>
 
-          {/* Scroll Indicator */}
-          <div className="mt-16 animate-bounce">
-            <div className="text-white text-sm mb-2">Scroll untuk lebih banyak</div>
-            <div className="mx-auto w-6 h-10 border-2 border-white rounded-full flex justify-center">
-              <div className="w-1 h-3 bg-white rounded-full mt-2 animate-pulse"></div>
+          {/* Scroll Indicator - Ukuran diperkecil */}
+          <div className="mt-12 md:mt-16 animate-bounce">
+            <div className="text-white text-xs md:text-sm mb-2">Scroll untuk lebih banyak</div>
+            <div className="mx-auto w-5 h-8 md:w-6 md:h-10 border-2 border-white rounded-full flex justify-center">
+              <div className="w-1 h-2 md:h-3 bg-white rounded-full mt-2 animate-pulse"></div>
             </div>
           </div>
         </div>
