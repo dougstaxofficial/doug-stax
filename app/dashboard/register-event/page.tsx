@@ -404,13 +404,13 @@ export default function RegisterEventPage() {
                   </div>
                   <div className="flex-1">
                     <p className="text-sm font-bold text-emerald-900 mb-2">Transfer ke rekening:</p>
-                    <p className="text-lg font-black text-gray-900">FITRI FATHONAH PURNAMASARI</p>
+                    <p className="text-lg font-black text-gray-900">ROELLY RIVAI ANDRIAN</p>
                     <div className="flex items-center gap-2 mt-2">
-                      <p className="text-2xl font-black text-emerald-700">7750048611</p>
+                      <p className="text-2xl font-black text-emerald-700">7747030705</p>
                       <button
                         type="button"
                         onClick={() => {
-                          navigator.clipboard.writeText('7750048611')
+                          navigator.clipboard.writeText('7747030705')
                           alert('Nomor rekening berhasil disalin!')
                         }}
                         className="px-3 py-1 bg-emerald-200 text-emerald-800 rounded-lg text-xs font-bold hover:bg-emerald-300 transition-all"

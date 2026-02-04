@@ -379,35 +379,37 @@ export default function DashboardPage() {
           </div>
         </div>
 
-        {/* Revenue Card */}
-        <div className="mb-12">
-          <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-10 shadow-2xl text-white relative overflow-hidden">
-            <div className="absolute inset-0 opacity-20">
-              <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent shimmer-effect"></div>
-            </div>
-            <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
-              <div className="mb-6 md:mb-0">
-                <h3 className="text-lg font-semibold mb-2 opacity-90">Total Revenue</h3>
-                <div className="text-5xl md:text-6xl font-display font-black mb-2">
-                  Rp {totalRevenue.toLocaleString('id-ID')}
-                </div>
-                <p className="text-sm opacity-80">
-                  {isAdmin ? 'Total pendapatan dari semua users' : 'Total pendapatan dari semua event'}
-                </p>
+        {/* Revenue Card - Only for Admin */}
+        {isAdmin && (
+          <div className="mb-12">
+            <div className="bg-gradient-to-r from-indigo-600 via-purple-600 to-pink-600 rounded-3xl p-10 shadow-2xl text-white relative overflow-hidden">
+              <div className="absolute inset-0 opacity-20">
+                <div className="absolute inset-0 bg-gradient-to-r from-transparent via-white to-transparent shimmer-effect"></div>
               </div>
-              <div className="flex items-center space-x-6">
-                <div className="text-center px-6 py-4 bg-white/10 backdrop-blur-md rounded-2xl">
-                  <div className="text-3xl font-bold">{paidRegistrations}</div>
-                  <div className="text-xs opacity-80 mt-1">Lunas</div>
+              <div className="relative z-10 flex flex-col md:flex-row items-center justify-between">
+                <div className="mb-6 md:mb-0">
+                  <h3 className="text-lg font-semibold mb-2 opacity-90">Total Revenue</h3>
+                  <div className="text-5xl md:text-6xl font-display font-black mb-2">
+                    Rp {totalRevenue.toLocaleString('id-ID')}
+                  </div>
+                  <p className="text-sm opacity-80">
+                    Total pendapatan dari semua users
+                  </p>
                 </div>
-                <div className="text-center px-6 py-4 bg-white/10 backdrop-blur-md rounded-2xl">
-                  <div className="text-3xl font-bold">{pendingRegistrations}</div>
-                  <div className="text-xs opacity-80 mt-1">Pending</div>
+                <div className="flex items-center space-x-6">
+                  <div className="text-center px-6 py-4 bg-white/10 backdrop-blur-md rounded-2xl">
+                    <div className="text-3xl font-bold">{paidRegistrations}</div>
+                    <div className="text-xs opacity-80 mt-1">Lunas</div>
+                  </div>
+                  <div className="text-center px-6 py-4 bg-white/10 backdrop-blur-md rounded-2xl">
+                    <div className="text-3xl font-bold">{pendingRegistrations}</div>
+                    <div className="text-xs opacity-80 mt-1">Pending</div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        )}
 
         {/* Quick Action Button - Only for regular users */}
         {!isAdmin && (
