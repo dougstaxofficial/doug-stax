@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     apple: '/logo.png',
   },
   openGraph: {
-    title: 'DougStax Hub',
+    title: 'DoConnect',
     description: 'Platform Komunitas Zumba, Padel, Running dan Tenis Indonesia',
     images: ['/logo.png'],
   },
