@@ -32,6 +32,7 @@ export default function DashboardPage() {
   const [selectedRegistration, setSelectedRegistration] = useState<Registration | null>(null)
   const [showModal, setShowModal] = useState(false)
   const [updating, setUpdating] = useState(false)
+  const [loadingImage, setLoadingImage] = useState(false) // ✅ NEW: Loading state untuk lazy load gambar
 
   // Check if user is admin
   const isAdmin = user?.user_metadata?.full_name?.toLowerCase() === 'admin' ||
@@ -49,10 +50,12 @@ export default function DashboardPage() {
 
       const supabase = createClient()
       
-      // Admin bisa lihat semua registrasi, user biasa hanya punya mereka
+      // ✅ OPTIMASI: Select hanya kolom yang diperlukan
+      // bukti_transfer_url TIDAK di-load untuk hemat bandwidth
+      // Akan di-load HANYA saat modal dibuka (lazy load)
       let query = supabase
         .from('event_registrations')
-        .select('*')
+        .select('id, user_id, nama_zin, asal_kota, nomor_wa_aktif, booking_tiket_vip, booking_tiket_reguler, payment_status, created_at')
         .order('created_at', { ascending: false })
 
       if (!isAdmin) {
@@ -64,7 +67,14 @@ export default function DashboardPage() {
       if (error) {
         console.error('Error fetching registrations:', error)
       } else {
-        setRegistrations(data || [])
+        // ✅ FIX: Tambahkan bukti_transfer_url: null sebagai default
+        // Akan di-load nanti via lazy loading saat modal dibuka
+        const registrationsWithNullBukti = (data || []).map(reg => ({
+          ...reg,
+          bukti_transfer_url: null
+        })) as Registration[]
+        
+        setRegistrations(registrationsWithNullBukti)
       }
       setLoadingData(false)
     }
@@ -104,6 +114,39 @@ export default function DashboardPage() {
     }
     
     setUpdating(false)
+  }
+
+  // ✅ OPTIMASI #2: LAZY LOAD bukti transfer - hanya load saat modal dibuka
+  // Ini SANGAT PENTING untuk hemat egress, terutama untuk gambar!
+  const handleOpenModal = async (registration: Registration) => {
+    setSelectedRegistration(registration)
+    setShowModal(true)
+    
+    // Jika bukti_transfer_url belum ada di state, fetch dari database
+    if (!registration.bukti_transfer_url) {
+      setLoadingImage(true)
+      const supabase = createClient()
+      
+      const { data, error } = await supabase
+        .from('event_registrations')
+        .select('bukti_transfer_url')
+        .eq('id', registration.id)
+        .single()
+      
+      if (!error && data) {
+        // Update selectedRegistration dengan bukti transfer URL
+        const updatedReg = { ...registration, bukti_transfer_url: data.bukti_transfer_url }
+        setSelectedRegistration(updatedReg)
+        
+        // Cache di state registrations untuk tidak fetch lagi next time
+        setRegistrations(prev => 
+          prev.map(reg => 
+            reg.id === registration.id ? updatedReg : reg
+          )
+        )
+      }
+      setLoadingImage(false)
+    }
   }
 
   // Calculate statistics
@@ -598,10 +641,7 @@ export default function DashboardPage() {
                         {isAdmin && (
                           <td className="py-5 px-6">
                             <button
-                              onClick={() => {
-                                setSelectedRegistration(reg)
-                                setShowModal(true)
-                              }}
+                              onClick={() => handleOpenModal(reg)}
                               className="px-4 py-2 bg-gradient-to-r from-indigo-500 to-purple-600 text-white text-xs font-bold rounded-lg hover:from-indigo-600 hover:to-purple-700 transition-all shadow-md hover:shadow-lg hover:scale-105"
                             >
                               Lihat Detail
@@ -716,7 +756,12 @@ export default function DashboardPage() {
                   </svg>
                   Bukti Transfer
                 </h4>
-                {selectedRegistration.bukti_transfer_url ? (
+                {loadingImage ? (
+                  <div className="text-center py-12 bg-gray-50 rounded-xl">
+                    <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-indigo-600 mx-auto mb-3"></div>
+                    <p className="text-gray-600 font-semibold">Loading bukti transfer...</p>
+                  </div>
+                ) : selectedRegistration.bukti_transfer_url ? (
                   <div className="space-y-4">
                     <div className="w-full" style={{ maxHeight: '500px' }}>
                     <Image
