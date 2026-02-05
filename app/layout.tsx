@@ -10,7 +10,7 @@ const plusJakartaSans = Plus_Jakarta_Sans({
 })
 
 export const metadata: Metadata = {
-  title: 'DougStax Hub - Platform Komunitas Zumba, Padel, Running dan Tenis',
+  title: 'DoConnect',
   description: 'Platform untuk komunitas Zumba, Padel, Running dan Tenis Indonesia',
   icons: {
     icon: [
