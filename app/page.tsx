@@ -65,7 +65,7 @@ export default function Home() {
           <div className="mb-6 md:mb-8 transform hover:scale-105 transition-transform duration-300">
             <div className="relative w-40 h-40 sm:w-56 sm:h-56 md:w-80 md:h-80 mx-auto mb-3 md:mb-4">
               <Image 
-                src="/logo1.png" 
+                src="/logo3.png" 
                 alt="DougStax Hub Logo"
                 fill
                 className="object-contain drop-shadow-2xl"
