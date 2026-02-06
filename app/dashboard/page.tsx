@@ -237,6 +237,160 @@ export default function DashboardPage() {
         .stat-card {
           transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         }
+
+        @keyframes glow-pulse {
+          0%, 100% { box-shadow: 0 0 20px rgba(168, 85, 247, 0.4); }
+          50% { box-shadow: 0 0 40px rgba(168, 85, 247, 0.8); }
+        }
+            
+        @keyframes sparkle {
+          0%, 100% { opacity: 0; transform: scale(0) rotate(0deg); }
+          50% { opacity: 1; transform: scale(1) rotate(180deg); }
+        }
+
+        @keyframes slide-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(30px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        .menu-card {
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+          animation: slide-in-up 0.6s ease-out forwards;
+          opacity: 0;
+        }
+
+        .menu-card:nth-child(1) { animation-delay: 0.1s; }
+        .menu-card:nth-child(2) { animation-delay: 0.15s; }
+        .menu-card:nth-child(3) { animation-delay: 0.2s; }
+        .menu-card:nth-child(4) { animation-delay: 0.25s; }
+        .menu-card:nth-child(5) { animation-delay: 0.3s; }
+        .menu-card:nth-child(6) { animation-delay: 0.35s; }
+        .menu-card:nth-child(7) { animation-delay: 0.4s; }
+        .menu-card:nth-child(8) { animation-delay: 0.45s; }
+
+        .menu-card::before {
+          content: '';
+          position: absolute;
+          top: -2px;
+          left: -2px;
+          right: -2px;
+          bottom: -2px;
+          background: linear-gradient(45deg, currentColor, transparent);
+          border-radius: 1.25rem;
+          opacity: 0;
+          transition: opacity 0.4s ease;
+          z-index: -1;
+        }
+
+        .menu-card:hover::before {
+          opacity: 0.3;
+        }
+
+        .menu-card:hover {
+          transform: translateY(-12px) scale(1.05) rotate(2deg);
+        }
+
+        .menu-card:active {
+          transform: translateY(-8px) scale(0.98);
+        }
+
+        .menu-icon-wrapper {
+          position: relative;
+          transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+        }
+
+        .menu-card:hover .menu-icon-wrapper {
+          transform: scale(1.2) rotate(15deg);
+        }
+
+        .sparkle-effect {
+          position: absolute;
+          width: 8px;
+          height: 8px;
+          background: white;
+          border-radius: 50%;
+          opacity: 0;
+        }
+
+        .menu-card:hover .sparkle-1 {
+          animation: sparkle 0.6s ease-out;
+          animation-delay: 0.1s;
+        }
+
+        .menu-card:hover .sparkle-2 {
+          animation: sparkle 0.6s ease-out;
+          animation-delay: 0.2s;
+        }
+
+        .menu-card:hover .sparkle-3 {
+          animation: sparkle 0.6s ease-out;
+          animation-delay: 0.3s;
+        }
+
+        .ripple {
+          position: absolute;
+          border-radius: 50%;
+          background: rgba(255, 255, 255, 0.6);
+          width: 100px;
+          height: 100px;
+          margin-top: -50px;
+          margin-left: -50px;
+          animation: ripple-animation 0.6s;
+          opacity: 0;
+        }
+
+        @keyframes ripple-animation {
+          from {
+            opacity: 1;
+            transform: scale(0);
+          }
+          to {
+            opacity: 0;
+            transform: scale(2);
+          }
+        }
+
+        .shine-effect {
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 70%
+          );
+          transform: translateX(-100%) translateY(-100%) rotate(45deg);
+          transition: transform 0.6s;
+        }
+
+        .menu-card:hover .shine-effect {
+          transform: translateX(100%) translateY(100%) rotate(45deg);
+        }
+
+        .badge-new {
+          position: absolute;
+          top: -8px;
+          right: -8px;
+          background: linear-gradient(135deg, #f59e0b, #ef4444);
+          color: white;
+          font-size: 10px;
+          font-weight: 800;
+          padding: 4px 8px;
+          border-radius: 12px;
+          box-shadow: 0 4px 12px rgba(239, 68, 68, 0.4);
+          animation: glow-pulse 2s infinite;
+          z-index: 10;
+        }
       `}</style>
 
       {/* Animated Background Blobs */}
@@ -313,7 +467,184 @@ export default function DashboardPage() {
           </p>
         </div>
 
+
+        {/* Menu Navigation - ENHANCED VERSION */}
+        {!isAdmin && (
+        <div className="mb-12">
+          <h2 className="text-2xl font-bold text-gray-900 mb-6 flex items-center">
+            <svg className="w-7 h-7 mr-2 text-purple-600" fill="currentColor" viewBox="0 0 20 20">
+              <path d="M3 4a1 1 0 011-1h12a1 1 0 011 1v2a1 1 0 01-1 1H4a1 1 0 01-1-1V4zM3 10a1 1 0 011-1h6a1 1 0 011 1v6a1 1 0 01-1 1H4a1 1 0 01-1-1v-6zM14 9a1 1 0 00-1 1v6a1 1 0 001 1h2a1 1 0 001-1v-6a1 1 0 00-1-1h-2z" />
+            </svg>
+            Menu Utama
+          </h2>
+          
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+            {/* Event */}
+            <Link 
+              href="/dashboard/event" 
+              className="menu-card group relative overflow-hidden bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 hover:from-purple-600 hover:via-purple-700 hover:to-purple-800 rounded-2xl p-6 shadow-xl block"
+            >
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              {/* Sparkle Effects */}
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Event</span>
+              </div>
+            </Link>
+
+            {/* Komunitas */}
+            <Link 
+              href="/dashboard/komunitas" 
+              className="menu-card group relative overflow-hidden bg-gradient-to-br from-blue-500 via-blue-600 to-blue-700 hover:from-blue-600 hover:via-blue-700 hover:to-blue-800 rounded-2xl p-6 shadow-xl"
+            >
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Komunitas</span>
+              </div>
+            </Link>
+
+            {/* Beli Tiket */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-pink-500 via-rose-600 to-rose-700 hover:from-pink-600 hover:via-rose-700 hover:to-rose-800 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2.5} d="M15 5v2m0 4v2m0 4v2M5 5a2 2 0 00-2 2v3a2 2 0 110 4v3a2 2 0 002 2h14a2 2 0 002-2v-3a2 2 0 110-4V7a2 2 0 00-2-2H5z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Beli Tiket</span>
+              </div>
+            </button>
+
+            {/* Lapangan */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-green-500 via-emerald-600 to-emerald-700 hover:from-green-600 hover:via-emerald-700 hover:to-emerald-800 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Lapangan</span>
+              </div>
+            </button>
+
+            {/* Outfit */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-orange-500 via-red-500 to-red-600 hover:from-orange-600 hover:via-red-600 hover:to-red-700 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path fillRule="evenodd" d="M3 3a1 1 0 011-1h12a1 1 0 011 1v3a1 1 0 01-.293.707L12 11.414V15a1 1 0 01-.293.707l-2 2A1 1 0 018 17v-5.586L3.293 6.707A1 1 0 013 6V3z" clipRule="evenodd" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Outfit</span>
+              </div>
+            </button>
+
+            {/* Merchandise */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-indigo-500 via-purple-600 to-purple-700 hover:from-indigo-600 hover:via-purple-700 hover:to-purple-800 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M3 1a1 1 0 000 2h1.22l.305 1.222a.997.997 0 00.01.042l1.358 5.43-.893.892C3.74 11.846 4.632 14 6.414 14H15a1 1 0 000-2H6.414l1-1H14a1 1 0 00.894-.553l3-6A1 1 0 0017 3H6.28l-.31-1.243A1 1 0 005 1H3zM16 16.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zM6.5 18a1.5 1.5 0 100-3 1.5 1.5 0 000 3z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Merchandise</span>
+              </div>
+            </button>
+
+            {/* Prelove */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-teal-500 via-cyan-600 to-cyan-700 hover:from-teal-600 hover:via-cyan-700 hover:to-cyan-800 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="badge-new">HOT 🔥</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Prelove</span>
+              </div>
+            </button>
+
+            {/* Barter */}
+            <button className="menu-card group relative overflow-hidden bg-gradient-to-br from-amber-500 via-yellow-500 to-yellow-600 hover:from-amber-600 hover:via-yellow-600 hover:to-yellow-700 rounded-2xl p-6 shadow-xl">
+              <div className="shine-effect"></div>
+              <div className="badge-new">NEW ✨</div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/0 via-white/5 to-white/0 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+              
+              <div className="sparkle-effect sparkle-1" style={{top: '20%', left: '20%'}}></div>
+              <div className="sparkle-effect sparkle-2" style={{top: '60%', right: '20%'}}></div>
+              <div className="sparkle-effect sparkle-3" style={{bottom: '20%', left: '50%'}}></div>
+              
+              <div className="relative flex flex-col items-center text-white z-10">
+                <div className="menu-icon-wrapper mb-3">
+                  <svg className="w-12 h-12" fill="currentColor" viewBox="0 0 20 20">
+                    <path d="M8 5a1 1 0 100 2h5.586l-1.293 1.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L13.586 5H8zM12 15a1 1 0 100-2H6.414l1.293-1.293a1 1 0 10-1.414-1.414l-3 3a1 1 0 000 1.414l3 3a1 1 0 001.414-1.414L6.414 15H12z" />
+                  </svg>
+                </div>
+                <span className="text-sm font-black tracking-wide">Barter</span>
+              </div>
+            </button>
+          </div>
+        </div>
+        )}
+
         {/* Stats Overview */}
+        {isAdmin && (
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-12">
           {/* Total Events Card */}
           <div 
@@ -421,6 +752,7 @@ export default function DashboardPage() {
             </div>
           </div>
         </div>
+        )}
 
         {/* Revenue Card - Only for Admin */}
         {isAdmin && (
@@ -454,25 +786,8 @@ export default function DashboardPage() {
           </div>
         )}
 
-        {/* Quick Action Button - Only for regular users */}
-        {!isAdmin && (
-          <div className="mb-10 flex justify-center">
-            <Link
-              href="/dashboard/register-event"
-              className="group inline-flex items-center px-10 py-5 bg-gradient-to-r from-purple-600 to-fuchsia-600 hover:from-purple-700 hover:to-fuchsia-700 text-white text-lg font-bold rounded-2xl shadow-2xl hover:shadow-purple-500/50 transition-all hover:scale-105"
-            >
-              <svg className="w-6 h-6 mr-3 group-hover:rotate-90 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M12 4v16m8-8H4" />
-              </svg>
-              Daftar Event Baru
-              <svg className="w-5 h-5 ml-3 group-hover:translate-x-2 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={3} d="M13 7l5 5m0 0l-5 5m5-5H6" />
-              </svg>
-            </Link>
-          </div>
-        )}
-
         {/* Registration History */}
+        {isAdmin && (
         <div className="glass-effect rounded-3xl shadow-2xl overflow-hidden border border-white/30">
           <div className="px-8 py-6 bg-gradient-to-r from-purple-600/10 to-fuchsia-600/10 border-b border-purple-200/30">
             <div className="flex flex-col md:flex-row md:items-center md:justify-between">
@@ -656,6 +971,7 @@ export default function DashboardPage() {
             )}
           </div>
         </div>
+        )}
       </main>
 
       {/* Admin Modal for Payment Details */}
