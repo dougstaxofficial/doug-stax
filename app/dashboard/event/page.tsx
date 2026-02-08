@@ -335,7 +335,7 @@ export default function EventPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <p className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-              © 2026 DougStax Hub. All rights reserved.
+              © 2026 DoConnect. All rights reserved.
             </p>
             <p className="text-xs text-gray-500 mt-2">Made with ❤️ for Sports Lovers</p>
           </div>

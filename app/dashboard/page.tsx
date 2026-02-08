@@ -418,7 +418,7 @@ export default function DashboardPage() {
               </div>
               <div className="flex flex-col justify-center">
                 <h1 className="text-2xl font-display font-bold bg-gradient-to-r from-purple-600 via-violet-600 to-fuchsia-600 bg-clip-text text-transparent leading-tight">
-                  DougStax Hub
+                  DoConnect
                 </h1>
                 <p className="text-xs text-gray-600 font-medium leading-tight mt-0.5">Sport Event Dashboard</p>
               </div>
@@ -1160,7 +1160,7 @@ export default function DashboardPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <p className="text-sm font-semibold bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-              © 2026 DougStax Hub. All rights reserved.
+              © 2026 DoConnect. All rights reserved.
             </p>
             <p className="text-xs text-gray-500 mt-2">Made with ❤️ for Sports Lovers</p>
           </div>

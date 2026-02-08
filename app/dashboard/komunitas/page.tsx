@@ -191,7 +191,7 @@ export default function KomunitasPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-black bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                  Komunitas DougStax
+                  Komunitas DoConnect
                 </h1>
                 <p className="text-xs font-semibold text-gray-600">Temukan komunitasmu di sini! 🎉</p>
               </div>
@@ -353,7 +353,7 @@ export default function KomunitasPage() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           <div className="text-center">
             <p className="text-gray-600 font-semibold">
-              © 2026 DougStax Hub. Bergabunglah dan temukan komunitas terbaikmu! 💖
+              © 2026 DoConnect. Bergabunglah dan temukan komunitas terbaikmu! 💖
             </p>
           </div>
         </div>
