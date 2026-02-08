@@ -150,7 +150,7 @@ export default function EventPage() {
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-xl ring-4 ring-purple-500/20 transition-transform hover:scale-110 hover:rotate-6 bg-white p-2">
                 <Image 
-                  src="/logo.png" 
+                  src="/logo3.png" 
                   alt="DougStax Hub Logo" 
                   width={64} 
                   height={64}
@@ -159,7 +159,7 @@ export default function EventPage() {
               </div>
               <div>
                 <h1 className="text-2xl font-black bg-gradient-to-r from-purple-600 to-fuchsia-600 bg-clip-text text-transparent">
-                  DougStax Hub
+                  DoConnect
                 </h1>
                 <p className="text-xs font-semibold text-gray-600">Events Portal</p>
               </div>

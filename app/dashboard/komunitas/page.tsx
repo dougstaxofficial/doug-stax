@@ -182,7 +182,7 @@ export default function KomunitasPage() {
             <div className="flex items-center space-x-4">
               <div className="w-16 h-16 rounded-2xl overflow-hidden relative flex-shrink-0 shadow-xl ring-4 ring-purple-500/20 bg-white p-2">
                 <Image 
-                  src="/logo.png" 
+                  src="/logo3.png" 
                   alt="DougStax Hub Logo" 
                   width={64} 
                   height={64}
